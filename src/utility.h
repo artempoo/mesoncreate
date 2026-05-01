@@ -1,6 +1,9 @@
 #ifndef UTILITY_H
 #define UTILITY_H
 
-char* get_name_app(char* envp[]);
+#include <stdbool.h>
+
+char* get_name_app(char* envp[], char* PWD_DIR_NAME);
+bool create_makefile(char* app_name);
 
 #endif

@@ -1,10 +1,11 @@
 #include "utility.h"
 
+#include <stdbool.h>
+#include <stdio.h>
 #include <string.h>
 
-char* get_name_app(char* envp[]) {
+char* get_name_app(char* envp[], char* PWD_DIR_NAME) {
   const char* PWD_ATTR_ENVP = "PWD=";
-  char* PWD_DIR_NAME = "";
 
   int index_envp = 0;
   while (envp[index_envp] != NULL) {
@@ -22,4 +23,31 @@ char* get_name_app(char* envp[]) {
   }
 
   return PWD_DIR_NAME;
+}
+
+bool create_makefile(char* app_name) {
+  FILE* fptr = fopen("Makefile", "w");
+  if (fptr == NULL) {
+    fprintf(stderr, "Ошибка, файл не создан");
+    return false;
+  }
+
+  fprintf(fptr, "all:\n\t");
+  fprintf(fptr, "meson compile -C build && ./build/");
+  fprintf(fptr, "%s\n\n", app_name);
+
+  fprintf(fptr, "build:\n\t");
+  fprintf(fptr, "meson setup build\n\n");
+
+  fprintf(fptr, "clean:\n\t");
+  fprintf(fptr, "rm -rf .cache && rm -rf build/\n\n");
+
+  fprintf(fptr, "run:\n\t");
+  fprintf(fptr, "./build/");
+  fprintf(fptr, "%s\n\n", app_name);
+
+  fprintf(fptr, ".PHONY: all build\n");
+
+  fclose(fptr);
+  return true;
 }
