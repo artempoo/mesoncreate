@@ -51,3 +51,19 @@ bool create_makefile(char* app_name) {
   fclose(fptr);
   return true;
 }
+
+bool create_clang_format(void) {
+  FILE* fptr = fopen(".clang-format", "w");
+  if (fptr == NULL) {
+    fprintf(stderr, "Ошибка, файл не создан");
+    return false;
+  }
+
+  fprintf(fptr, "BasedOnStyle: Google\n");
+  fprintf(fptr, "IndentWidth: 2\n");
+  fprintf(fptr, "ColumnLimit: 0\n");
+
+  fclose(fptr);
+
+  return true;
+}

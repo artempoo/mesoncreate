@@ -11,9 +11,15 @@ int main(int argc, char** argv, char* envp[]) {
   char* r = get_name_app(envp, app_name);
   app_name = r;
 
-  bool res = create_makefile(app_name);
-  if (!res) {
+  bool makefile = create_makefile(app_name);
+  if (!makefile) {
     fprintf(stderr, "Неудалось создать Makefile\n");
+    return 1;
+  }
+
+  bool clangformat = create_clang_format();
+  if (!clangformat) {
+    fprintf(stderr, "Неудалось создать .clang-format\n");
     return 1;
   }
 
