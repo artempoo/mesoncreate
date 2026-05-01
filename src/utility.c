@@ -67,3 +67,17 @@ bool create_clang_format(void) {
 
   return true;
 }
+
+bool create_gitignore(void) {
+  FILE* fptr = fopen(".gitignore", "w");
+  if (fptr == NULL) {
+    fprintf(stderr, "Ошибка, файл не создан");
+    return false;
+  }
+
+  fprintf(fptr, ".cache/\n");
+  fprintf(fptr, "build/\n");
+
+  fclose(fptr);
+  return true;
+}

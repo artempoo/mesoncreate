@@ -23,5 +23,11 @@ int main(int argc, char** argv, char* envp[]) {
     return 1;
   }
 
+  bool gitignore = create_clang_format();
+  if (!gitignore) {
+    fprintf(stderr, "Неудалось создать .clangformat\n");
+    return 1;
+  }
+
   return 0;
 }
