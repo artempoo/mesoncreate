@@ -1,12 +1,15 @@
 #include <stdio.h>
 
-#define PROJECT_NAME "mesoncreate"
+#include "src/utility.h"
 
-int main(int argc, char **argv) {
-    if (argc != 1) {
-        printf("%s takes no arguments.\n", argv[0]);
-        return 1;
-    }
-    printf("This is project %s.\n", PROJECT_NAME);
-    return 0;
+int main(int argc, char** argv, char* envp[]) {
+  (void)argc;
+  (void)argv;
+  // создать строки для Makefile
+  // сохранить файл
+  // проверить
+
+  printf("%s\n", get_name_app(envp));
+
+  return 0;
 }

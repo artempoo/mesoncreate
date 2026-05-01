@@ -11,6 +11,7 @@ dependencies = [
 
 sources = [
   'mesoncreate.c',
+  'src/utility.c',
 ]
 
 exe = executable(
