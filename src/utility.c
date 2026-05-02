@@ -36,8 +36,11 @@ bool create_makefile(char* app_name) {
   fprintf(fptr, "meson compile -C build && ./build/");
   fprintf(fptr, "%s\n\n", app_name);
 
-  fprintf(fptr, "build:\n\t");
+  fprintf(fptr, "setup:\n\t");
   fprintf(fptr, "meson setup build\n\n");
+
+  fprintf(fptr, "build:\n\t");
+  fprintf(fptr, "meson compile -C build\n\n");
 
   fprintf(fptr, "clean:\n\t");
   fprintf(fptr, "rm -rf .cache && rm -rf build/\n\n");
@@ -49,6 +52,11 @@ bool create_makefile(char* app_name) {
   fprintf(fptr, ".PHONY: all build\n");
 
   fclose(fptr);
+
+  printf("\033[32m");
+  printf("Создал Makefile\n");
+  printf("\033[0m");
+
   return true;
 }
 
@@ -65,6 +73,10 @@ bool create_clang_format(void) {
 
   fclose(fptr);
 
+  printf("\033[32m");
+  printf("Создал .clang-format\n");
+  printf("\033[0m");
+
   return true;
 }
 
@@ -79,5 +91,10 @@ bool create_gitignore(void) {
   fprintf(fptr, "build/\n");
 
   fclose(fptr);
+
+  printf("\033[32m");
+  printf("Создал .gitignore\n");
+  printf("\033[0m");
+
   return true;
 }
